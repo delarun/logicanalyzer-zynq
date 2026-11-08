@@ -25,7 +25,7 @@
 #define LA_WORDS        0x44
 #define LA_DNA_LO       0x48
 #define LA_DNA_HI       0x4C
-#define LA_TDIV         0x50   // меандр на J9 TX/RST и J18: f = 100 МГц / (2 * (TDIV + 1)), 0 — выкл
+#define LA_TDIV         0x50   // меандр на J18 (пин 4 FAN): f = 100 МГц / (2 * (TDIV + 1)), 0 — выкл
 
 #define LA_CTRL_START   (1u << 0)
 #define LA_CTRL_STOP    (1u << 1)
