@@ -1,0 +1,84 @@
+lwIP 2.1.1 (Vitis 2022.2, lwip211_v1_8 → v1_9): определение скорости для PHY не Marvell/TI/Realtek.
+
+diff -ru a/data/lwip211.mld b/data/lwip211.mld
+--- a/data/lwip211.mld	2026-11-08 22:23:29.279817105 +0400
++++ b/data/lwip211.mld	2026-11-08 22:23:49.054148431 +0400
+@@ -12,7 +12,7 @@
+   OPTION desc = "lwip211 library: lwIP (light weight IP) is an open source TCP/IP stack configured for Xilinx hard and soft Ethernet MACs";
+   OPTION app_linker_flags = "-Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group";
+   OPTION requires_os = (standalone freertos10_xilinx);
+-  OPTION VERSION = 1.8;
++  OPTION VERSION = 1.9;
+   OPTION NAME = lwip211;
+ 
+   PARAM name = api_mode, desc = "Mode of operation for lwIP (RAW API/Sockets API)", type = enum, values = ("RAW API" = RAW_API, "SOCKET API" = SOCKET_API), default = RAW_API;
+diff -ru a/src/contrib/ports/xilinx/netif/xemacpsif_physpeed.c b/src/contrib/ports/xilinx/netif/xemacpsif_physpeed.c
+--- a/src/contrib/ports/xilinx/netif/xemacpsif_physpeed.c	2026-11-08 22:23:29.279336712 +0400
++++ b/src/contrib/ports/xilinx/netif/xemacpsif_physpeed.c	2026-11-08 22:23:45.284711821 +0400
+@@ -676,6 +676,54 @@
+ 	return XST_FAILURE;
+ }
+ 
++/* antminer-s9: PHY, неизвестный драйверу (на S9 — не Marvell/TI/Realtek).
++ * Скорость определяется только по стандартным регистрам IEEE 802.3:
++ * 4/5 (10/100), 9/10 (1000BASE-T). Задержки RGMII не трогаем:
++ * их задают страпы PHY (в Linux/U-Boot S9 — rgmii-id и generic PHY). */
++static u32_t get_generic_phy_speed(XEmacPs *xemacpsp, u32_t phy_addr)
++{
++	u16_t id1, id2, ctrl, status, adv, lpa, ctrl1000, stat1000;
++	u32_t timeout = 0;
++
++	XEmacPs_PhyRead(xemacpsp, phy_addr, PHY_IDENTIFIER_1_REG, &id1);
++	XEmacPs_PhyRead(xemacpsp, phy_addr, PHY_IDENTIFIER_2_REG, &id2);
++	xil_printf("Generic PHY %04x:%04x at %d, start autonegotiation\r\n",
++			   id1, id2, phy_addr);
++
++	XEmacPs_PhyRead(xemacpsp, phy_addr, 4, &adv);
++	adv |= 0x0C00 | 0x01E0;			/* pause + 10/100 HD/FD */
++	XEmacPs_PhyWrite(xemacpsp, phy_addr, 4, adv);
++	XEmacPs_PhyRead(xemacpsp, phy_addr, 9, &ctrl1000);
++	ctrl1000 |= 0x0200;				/* 1000BASE-T FD */
++	XEmacPs_PhyWrite(xemacpsp, phy_addr, 9, ctrl1000);
++	XEmacPs_PhyRead(xemacpsp, phy_addr, 0, &ctrl);
++	ctrl |= 0x1000 | 0x0200;		/* AN enable + restart */
++	XEmacPs_PhyWrite(xemacpsp, phy_addr, 0, ctrl);
++
++	for (;;) {
++		sleep(1);
++		/* бит link — latch-low: читаем дважды */
++		XEmacPs_PhyRead(xemacpsp, phy_addr, 1, &status);
++		XEmacPs_PhyRead(xemacpsp, phy_addr, 1, &status);
++		if ((status & 0x0020) && (status & 0x0004))
++			break;
++		if (++timeout == 30) {
++			xil_printf("Generic PHY: no link / autonegotiation timeout\r\n");
++			return XST_FAILURE;
++		}
++	}
++
++	XEmacPs_PhyRead(xemacpsp, phy_addr, 10, &stat1000);
++	XEmacPs_PhyRead(xemacpsp, phy_addr, 5, &lpa);
++	xil_printf("Generic PHY: adv %04x lpa %04x 1000ctl %04x 1000stat %04x\r\n",
++			   adv, lpa, ctrl1000, stat1000);
++	if ((ctrl1000 & 0x0200) && (stat1000 & 0x0800))
++		return 1000;
++	if ((adv & lpa) & 0x0180)
++		return 100;
++	return 10;
++}
++
+ static u32_t get_IEEE_phy_speed(XEmacPs *xemacpsp, u32_t phy_addr)
+ {
+ 	u16_t phy_identity;
+@@ -687,8 +735,10 @@
+ 		RetStatus = get_TI_phy_speed(xemacpsp, phy_addr);
+ 	} else if (phy_identity == PHY_REALTEK_IDENTIFIER) {
+ 		RetStatus = get_Realtek_phy_speed(xemacpsp, phy_addr);
+-	} else {
++	} else if (phy_identity == PHY_MARVELL_IDENTIFIER) {
+ 		RetStatus = get_Marvell_phy_speed(xemacpsp, phy_addr);
++	} else {
++		RetStatus = get_generic_phy_speed(xemacpsp, phy_addr);
+ 	}
+ 
+ 	return RetStatus;
