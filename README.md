@@ -69,3 +69,7 @@ tools/s9la/s9la.py <ip> selftest 50e6 4 100e6    # шаблон-счётчик: 
   с таймингами Vivado по умолчанию ONFI не распознаётся.
 - Vitis 2022.2 на свежих дистрибутивах: если xsct падает с `channel tcfchan#0 closed`, переименуй
   `Vitis/2022.2/lib/lnx64.o/Default/libstdc++.so.6` (старая libstdc++ ломает GTK/SWT).
+
+## Лицензия
+
+[GPL-3.0](LICENSE). Драйвер `tools/sigrok/driver` — часть libsigrok (GPL-3.0-or-later).
