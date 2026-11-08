@@ -107,7 +107,7 @@ la-sim:
 	$(SETTINGS) && hw/la/sim/run.sh
 
 la-hw: $(LA_XSA)
-$(LA_XSA) $(LA_BIT) &: hw/la/create_project.tcl hw/la/la.xdc hw/la/rtl/s9la_core.v hw/common/ps7_s9.tcl
+$(LA_XSA) $(LA_BIT) &: hw/la/create_project.tcl hw/la/la.xdc hw/la/rtl/s9la_core.v hw/la/rtl/s9probe.v hw/common/ps7_s9.tcl
 	mkdir -p $(LA_HW)
 	$(SETTINGS) && vivado -mode batch -nojournal -log $(LA_HW)/vivado.log \
 		-source hw/la/create_project.tcl -tclargs $(abspath $(LA_HW))

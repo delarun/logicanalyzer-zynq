@@ -1,0 +1,13 @@
+[Unit]
+Description=S9 probe: /dev/ttyETH0, /dev/i2c-10, /dev/spidev10.0 по сети
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# адрес S9 и устройства — в /etc/s9bridge.conf
+ExecStartPre=/usr/bin/modprobe cuse
+ExecStart=/usr/local/bin/s9bridge
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

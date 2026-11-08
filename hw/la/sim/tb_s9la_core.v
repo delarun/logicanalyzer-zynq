@@ -24,7 +24,7 @@ module tb_s9la_core;
     s9la_core #(.USE_DNA(0)) dut (
         .aclk(aclk), .aresetn(aresetn),
         .hb_rx(8'd0), .hb_tx(8'd0), .hb_rst(8'd0), .hb_plug(8'd0),
-        .test_tx(), .test_rst(), .fan_pwm(), .led(led),
+        .fan_pwm(), .led(led),
         .s_axi_awaddr(awaddr), .s_axi_awvalid(awvalid), .s_axi_awready(awready),
         .s_axi_wdata(wdata), .s_axi_wstrb(4'hF), .s_axi_wvalid(wvalid), .s_axi_wready(wready),
         .s_axi_bresp(bresp), .s_axi_bvalid(bvalid), .s_axi_bready(bready),

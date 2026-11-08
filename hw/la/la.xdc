@@ -48,14 +48,31 @@ set_property -dict {PACKAGE_PIN V16 IOSTANDARD LVCMOS33} [get_ports {hb_tx[7]}]
 set_property -dict {PACKAGE_PIN Y19 IOSTANDARD LVCMOS33} [get_ports {hb_rst[7]}]
 set_property -dict {PACKAGE_PIN Y18 IOSTANDARD LVCMOS33} [get_ports {hb_plug[7]}]
 
-## Тестовые выходы: J9 TX, J9 RST, J18 (PWM вентиляторов, пин 4 разъёмов FAN)
-set_property -dict {PACKAGE_PIN T17 IOSTANDARD LVCMOS33} [get_ports test_tx]
-set_property -dict {PACKAGE_PIN R17 IOSTANDARD LVCMOS33} [get_ports test_rst]
+## Тестовый выход: J18 (PWM вентиляторов, пин 4 разъёмов FAN)
 set_property -dict {PACKAGE_PIN J18 IOSTANDARD LVCMOS33} [get_ports fan_pwm]
+
+## Отладочные интерфейсы (s9probe): JTAG/SWD, UART, SPI, I2C, GPIO
+set_property -dict {PACKAGE_PIN T17 IOSTANDARD LVCMOS33} [get_ports {probe[0]}] ;# J9 TX — TCK/SWCLK
+set_property -dict {PACKAGE_PIN R17 IOSTANDARD LVCMOS33} [get_ports {probe[1]}] ;# J9 RST — TMS/SWDIO
+set_property -dict {PACKAGE_PIN R16 IOSTANDARD LVCMOS33} [get_ports {probe[2]}] ;# J9 PLUG — TDI
+set_property -dict {PACKAGE_PIN R18 IOSTANDARD LVCMOS33} [get_ports {probe[3]}] ;# J9 RX — TDO
+set_property -dict {PACKAGE_PIN F19 IOSTANDARD LVCMOS33} [get_ports {probe[4]}] ;# FAN1 SPEED — nRESET
+set_property -dict {PACKAGE_PIN G18 IOSTANDARD LVCMOS33} [get_ports {probe[5]}] ;# FAN2 SPEED — UART TX
+set_property -dict {PACKAGE_PIN F20 IOSTANDARD LVCMOS33} [get_ports {probe[6]}] ;# FAN3 SPEED — UART RX
+set_property -dict {PACKAGE_PIN J20 IOSTANDARD LVCMOS33} [get_ports {probe[7]}] ;# FAN4 SPEED — SPI SCK
+set_property -dict {PACKAGE_PIN G17 IOSTANDARD LVCMOS33} [get_ports {probe[8]}] ;# FAN5 SPEED — SPI MOSI
+set_property -dict {PACKAGE_PIN H20 IOSTANDARD LVCMOS33} [get_ports {probe[9]}] ;# FAN6 SPEED — SPI MISO
+set_property -dict {PACKAGE_PIN W18 IOSTANDARD LVCMOS33} [get_ports {probe[10]}] ;# SCL1 (J1–J8 пин 4) — SPI CS
+set_property -dict {PACKAGE_PIN N17 IOSTANDARD LVCMOS33} [get_ports {probe[11]}] ;# SCL2 (J9 пин 4) — I2C SCL
+set_property -dict {PACKAGE_PIN P18 IOSTANDARD LVCMOS33} [get_ports {probe[12]}] ;# SDA2 (J9 пин 3) — I2C SDA
+set_property -dict {PACKAGE_PIN W19 IOSTANDARD LVCMOS33} [get_ports {probe[13]}] ;# SDA1 (J1–J8 пин 3) — резерв
 
 ## Входы асинхронны: первый триггер в IOB (атрибут в RTL), дальше синхронизатор
 set_false_path -from [get_ports {hb_rx[*] hb_tx[*] hb_rst[*] hb_plug[*]}]
-set_false_path -to   [get_ports {led[*] test_tx test_rst fan_pwm}]
+set_false_path -to   [get_ports {led[*] fan_pwm}]
+# probe: синхронные интерфейсы на низкой частоте, тайминг держит делитель
+set_false_path -from [get_ports {probe[*]}]
+set_false_path -to   [get_ports {probe[*]}]
 
 set_property CFGBVS VCCO        [current_design]
 set_property CONFIG_VOLTAGE 3.3 [current_design]

@@ -10,6 +10,8 @@
 | Память | 384 МБ в DDR (до 384 млн выборок при 8 каналах) |
 | Тестовый выход | меандр 1 кГц…1 МГц на J9 TX/RST и PWM вентиляторов |
 | Входная плата | схема переходника с защитой и буферами — [hw/frontend](hw/frontend/s9la_frontend.svg) |
+| Отладка | JTAG, SWD, SPI, UART, I2C на свободных линиях (J9, FAN): XVC, CMSIS-DAP для OpenOCD, flashrom, RFC2217 — [sw/la/PROBE.md](sw/la/PROBE.md) |
+| Устройства на ПК | `/dev/ttyETH0`, `/dev/i2c-10`, `/dev/spidev10.0` по сети — [tools/s9bridge](tools/s9bridge/README.md) |
 | Триггер | аппаратный: уровни + фронты/спады, предзапись |
 | Выгрузка | ~95 МБ/с по TCP (порт 5555), протокол — [sw/la/PROTOCOL.md](sw/la/PROTOCOL.md) |
 | Клиенты | PulseView и sigrok-cli со своим драйвером `antminer-s9-la` |
@@ -60,6 +62,9 @@ tools/s9la/s9la.py <ip> selftest 50e6 4 100e6    # шаблон-счётчик: 
 | `sw/patches/` | патч lwIP: определение скорости для PHY Broadcom на S9 |
 | `tools/sigrok/` | драйвер libsigrok и сборка PulseView/sigrok-cli |
 | `tools/s9la/` | клиент на Python для проверки |
+| `hw/la/rtl/s9probe.v`, `sw/la/src/svc_*.c` | движок JTAG/SWD/SPI, UART, GPIO и сетевые сервисы |
+| `tools/s9bridge/` | служба ПК: устройства в /dev через PTY и CUSE |
+| `tools/openocd/` | сборка OpenOCD с CMSIS-DAP по TCP и конфиги |
 | `hw/base/`, `sw/base/` | базовый проект: эхо-сервер lwIP и тест памяти |
 | `board/` | справочник по плате S9 v1.3 |
 

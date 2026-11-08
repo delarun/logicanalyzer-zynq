@@ -14,6 +14,8 @@
 #include "xparameters.h"
 
 #include "la_server.h"
+#include "probe.h"
+#include "services.h"
 #include "s9la_regs.h"
 
 void tcp_fasttmr(void);
@@ -91,6 +93,13 @@ int main(void)
     print_ip("Шлюз:    ", &echo_netif->gw);
 
     la_server_init();
+    probe_init();
+    svc_xvc_init();
+    svc_dap_init();
+    svc_serprog_init();
+    svc_uart_init();
+    svc_cmd_init();
+    svc_bridge_init();
     la_set_led(LED_NET, 1);
 
     for (;;) {
@@ -98,6 +107,12 @@ int main(void)
         if (TcpSlowTmrFlag) { tcp_slowtmr(); TcpSlowTmrFlag = 0; }
         xemacif_input(echo_netif);
         la_server_poll();
+        svc_xvc_poll();
+        svc_dap_poll();
+        svc_serprog_poll();
+        svc_uart_poll();
+        svc_cmd_poll();
+        svc_bridge_poll();
     }
     return 0;
 }

@@ -30,7 +30,7 @@
 //   0x44 WORDS   R: слов 64 бита записано в DDR (для отладки)
 //   0x48 DNA_LO  R: Device DNA [31:0]
 //   0x4C DNA_HI  R: bit31 — DNA прочитан, [24:0] — DNA [56:32]
-//   0x50 TDIV    RW: тестовый меандр на J9 TX, J9 RST и J18 (PWM вентиляторов):
+//   0x50 TDIV    RW: тестовый меандр на J18 (PWM вентиляторов, пин 4 разъёмов FAN):
 //                    f = aclk / (2 * (TDIV + 1)), 0 — выключен (низкий уровень)
 //
 // Каналы (бит выборки): по 4 на разъём хешплаты J1..J8 — RX, TX, RST, PLUG.
@@ -58,9 +58,7 @@ module s9la_core #(
     input  wire [7:0]  hb_tx,
     input  wire [7:0]  hb_rst,
     input  wire [7:0]  hb_plug,
-    // Тестовые выходы: меандр TDIV или 0
-    output wire        test_tx,      // J9 TX
-    output wire        test_rst,     // J9 RST
+    // Тестовый выход: меандр TDIV или 0
     output wire        fan_pwm,      // J18, пин 4 разъёмов FAN
     output wire [3:0]  led,
 
@@ -278,7 +276,7 @@ module s9la_core #(
     endgenerate
 
     // -----------------------------------------------------------------
-    // Светодиоды и тестовый меандр (J9 TX, J9 RST, J18)
+    // Светодиоды и тестовый меандр (J18)
     // -----------------------------------------------------------------
     assign led = {state == ST_CAPT, r_led};
 
@@ -295,8 +293,6 @@ module s9la_core #(
             tdiv_cnt <= tdiv_cnt + 32'd1;
         end
     end
-    assign test_tx  = test_sq;
-    assign test_rst = test_sq;
     assign fan_pwm  = test_sq;
 
     // -----------------------------------------------------------------

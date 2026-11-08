@@ -29,7 +29,7 @@ proc ipvlnv {name} {
 
 create_project $proj_name $build_dir -part $part -force
 set_property target_language Verilog [current_project]
-add_files -norecurse "$script_dir/rtl/s9la_core.v"
+add_files -norecurse [list "$script_dir/rtl/s9la_core.v" "$script_dir/rtl/s9probe.v"]
 update_compile_order -fileset sources_1
 
 # ---------------------------------------------------------------------
@@ -47,11 +47,17 @@ set_property -dict [list \
 ] $ps
 
 set la [create_bd_cell -type module -reference s9la_core la]
+set probe [create_bd_cell -type module -reference s9probe probe]
 
 # Регистры: GP0 → AXI-Lite ядра
 apply_bd_automation -rule xilinx.com:bd_rule:axi4 \
     -config {Clk_master {/ps7/FCLK_CLK0 (100 MHz)} Clk_slave {/ps7/FCLK_CLK0 (100 MHz)} Clk_xbar {/ps7/FCLK_CLK0 (100 MHz)} Master {/ps7/M_AXI_GP0} Slave {/la/s_axi} intc_ip {New AXI Interconnect} master_apm {0}} \
     [get_bd_intf_pins la/s_axi]
+
+# Регистры отладочных интерфейсов: тот же GP0
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 \
+    -config {Clk_master {/ps7/FCLK_CLK0 (100 MHz)} Clk_slave {/ps7/FCLK_CLK0 (100 MHz)} Clk_xbar {/ps7/FCLK_CLK0 (100 MHz)} Master {/ps7/M_AXI_GP0} Slave {/probe/s_axi} intc_ip {Auto} master_apm {0}} \
+    [get_bd_intf_pins probe/s_axi]
 
 # Данные: m_axi ядра → HP0 (протокол AXI4 → AXI3 преобразует interconnect)
 apply_bd_automation -rule xilinx.com:bd_rule:axi4 \
@@ -64,8 +70,6 @@ foreach {name dir width} {
     hb_tx    I 8
     hb_rst   I 8
     hb_plug  I 8
-    test_tx  O 1
-    test_rst O 1
     fan_pwm  O 1
     led      O 4
 } {
@@ -77,12 +81,20 @@ foreach {name dir width} {
     connect_bd_net [get_bd_ports $name] [get_bd_pins la/$name]
 }
 
+# Линии probe: выход/разрешение/вход наружу, IOBUF — в верхнем модуле
+foreach {name dir} {pin_o O pin_oe O pin_i I} {
+    create_bd_port -dir $dir -from 13 -to 0 probe_$name
+    connect_bd_net [get_bd_ports probe_$name] [get_bd_pins probe/$name]
+}
+
 assign_bd_address
-# Фиксированный адрес регистров — прошивка использует его напрямую
-set seg [get_bd_addr_segs -of_objects [get_bd_addr_spaces ps7/Data] -filter {NAME =~ "*la*"}]
-set_property offset 0x43C00000 $seg
-set_property range  64K        $seg
-puts "Регистры ядра: [get_property offset $seg]"
+# Фиксированные адреса регистров — прошивка использует их напрямую
+foreach {pat addr} {"*SEG_la_*" 0x43C00000 "*SEG_probe_*" 0x43C10000} {
+    set seg [get_bd_addr_segs -of_objects [get_bd_addr_spaces ps7/Data] -filter "NAME =~ $pat"]
+    set_property offset $addr $seg
+    set_property range  64K   $seg
+    puts "Регистры [get_property NAME $seg]: [get_property offset $seg]"
+}
 
 validate_bd_design
 save_bd_design
@@ -92,7 +104,39 @@ save_bd_design
 # ---------------------------------------------------------------------
 set wrapper [make_wrapper -files [get_files system.bd] -top]
 add_files -norecurse $wrapper
-set_property top system_wrapper [current_fileset]
+
+# Верхний модуль: порты обёртки как есть, а probe_pin_o/oe/i → inout probe[13:0] через IOBUF
+set fh [open $wrapper r]; set wtext [read $fh]; close $fh
+set ports {}
+foreach line [split $wtext "\n"] {
+    if {[regexp {^\s*(input|output|inout)\s*(\[[0-9]+:[0-9]+\])?\s*(\w+);} $line -> dir rng name]} {
+        lappend ports [list $dir $rng $name]
+    }
+}
+set top "$build_dir/s9la_top.v"
+set fh [open $top w]
+puts $fh "// Сгенерировано hw/la/create_project.tcl — не редактировать"
+puts $fh "module s9la_top ("
+set decl {}; set conn {}
+foreach p $ports {
+    lassign $p dir rng name
+    if {[string match probe_pin_* $name]} continue
+    lappend decl "    $dir $rng $name"
+    lappend conn "    .$name\($name\)"
+}
+lappend decl "    inout \[13:0\] probe"
+puts $fh "[join $decl ",\n"]\n);"
+puts $fh "    wire \[13:0\] probe_pin_o, probe_pin_oe, probe_pin_i;"
+puts $fh "    system_wrapper u_sys (\n[join $conn ",\n"],"
+puts $fh "    .probe_pin_o(probe_pin_o), .probe_pin_oe(probe_pin_oe), .probe_pin_i(probe_pin_i));"
+puts $fh "    genvar i;"
+puts $fh "    generate for (i = 0; i < 14; i = i + 1) begin : g_io"
+puts $fh "        IOBUF u_io (.IO(probe\[i\]), .I(probe_pin_o\[i\]), .T(!probe_pin_oe\[i\]), .O(probe_pin_i\[i\]));"
+puts $fh "    end endgenerate"
+puts $fh "endmodule"
+close $fh
+add_files -norecurse $top
+set_property top s9la_top [current_fileset]
 add_files -fileset constrs_1 -norecurse "$script_dir/la.xdc"
 
 launch_runs impl_1 -to_step write_bitstream -jobs $jobs
@@ -108,6 +152,6 @@ set wns [get_property SLACK [get_timing_paths -max_paths 1 -nworst 1 -setup]]
 puts "WNS: $wns нс"
 if {$wns < 0} { error "Тайминг не сошёлся: WNS = $wns" }
 
-file copy -force "$build_dir/$proj_name.runs/impl_1/system_wrapper.bit" "$build_dir/s9_la.bit"
+file copy -force "$build_dir/$proj_name.runs/impl_1/s9la_top.bit" "$build_dir/s9_la.bit"
 write_hw_platform -fixed -include_bit -force -file "$build_dir/s9_la.xsa"
 puts "OK: $build_dir/s9_la.xsa"

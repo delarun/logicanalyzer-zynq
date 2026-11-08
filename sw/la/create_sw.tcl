@@ -35,6 +35,7 @@ foreach {k v} {
     pbuf_pool_size        1024
     tcp_snd_buf           65535
     tcp_wnd               16384
+    memp_n_tcp_pcb_listen 16
     n_tx_descriptors      512
     n_rx_descriptors      128
 } {
