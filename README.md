@@ -17,7 +17,7 @@
 | Клиенты | PulseView и sigrok-cli со своим драйвером `antminer-s9-la` |
 | Загрузка | с NAND платы, без Linux (bare-metal + lwIP) |
 
-Описание платы, распиновка и перемычки загрузки — [board/README.md](board/README.md).
+**Что куда подключать — [PINOUT.md](PINOUT.md).** Описание платы и перемычки загрузки — [board/README.md](board/README.md).
 
 ## Что нужно
 
