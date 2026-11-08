@@ -73,12 +73,14 @@
 #set_property -dict {PACKAGE_PIN L19 IOSTANDARD LVCMOS33} [get_ports {led[3]}] ;# D8
 
 ## ---------------- Вентиляторы ----------------
+## SPEED: соответствие разъёмам FAN1..6 проверено на плате (перемычка PWM→SPEED);
+## на картинке распиновки FAN2–FAN5 перепутаны (там F20, G17, G18, J20 по порядку).
 #set_property -dict {PACKAGE_PIN J18 IOSTANDARD LVCMOS33} [get_ports {fan_pwm}]     ;# FAN1-6 PWM out (общий)
 #set_property -dict {PACKAGE_PIN F19 IOSTANDARD LVCMOS33} [get_ports {fan_tach[0]}] ;# FAN1 SPEED in
-#set_property -dict {PACKAGE_PIN F20 IOSTANDARD LVCMOS33} [get_ports {fan_tach[1]}] ;# FAN2 SPEED in
-#set_property -dict {PACKAGE_PIN G17 IOSTANDARD LVCMOS33} [get_ports {fan_tach[2]}] ;# FAN3 SPEED in
-#set_property -dict {PACKAGE_PIN G18 IOSTANDARD LVCMOS33} [get_ports {fan_tach[3]}] ;# FAN4 SPEED in
-#set_property -dict {PACKAGE_PIN J20 IOSTANDARD LVCMOS33} [get_ports {fan_tach[4]}] ;# FAN5 SPEED in
+#set_property -dict {PACKAGE_PIN G18 IOSTANDARD LVCMOS33} [get_ports {fan_tach[1]}] ;# FAN2 SPEED in
+#set_property -dict {PACKAGE_PIN F20 IOSTANDARD LVCMOS33} [get_ports {fan_tach[2]}] ;# FAN3 SPEED in
+#set_property -dict {PACKAGE_PIN J20 IOSTANDARD LVCMOS33} [get_ports {fan_tach[3]}] ;# FAN4 SPEED in
+#set_property -dict {PACKAGE_PIN G17 IOSTANDARD LVCMOS33} [get_ports {fan_tach[4]}] ;# FAN5 SPEED in
 #set_property -dict {PACKAGE_PIN H20 IOSTANDARD LVCMOS33} [get_ports {fan_tach[5]}] ;# FAN6 SPEED in
 
 ## ---------------- Разное ----------------

@@ -14,7 +14,9 @@ after 500
 puts [targets]
 
 targets -set -nocase -filter {name =~ "APU*"}
-rst -system
+# -stop: ядра стоят после сброса — плата не начнёт грузиться с NAND/SD, даже если
+# перемычки не в режиме JTAG
+rst -system -stop
 after 1000
 
 puts "Битстрим: $bit"

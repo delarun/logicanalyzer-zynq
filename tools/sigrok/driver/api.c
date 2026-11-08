@@ -50,22 +50,49 @@ static const uint64_t samplerates[] = {
 	SR_MHZ(25), SR_MHZ(50), SR_MHZ(100),
 };
 
-static const char *patterns[] = {
-	"Inputs",
-	"Counter (self-test)",
-	"Inputs + TX test signals",
+/* Pattern: режим устройства (0 входы, 1 счётчик) + тестовый меандр на J9 TX/RST и J18. */
+static const struct {
+	const char *name;
+	int pattern;
+	uint32_t testfreq;
+} patterns[] = {
+	{ "Inputs", 0, 0 },
+	{ "Counter (self-test)", 1, 0 },
+	{ "Inputs + test 1 kHz (J9 TX/RST, FAN pin 4)", 0, 1000 },
+	{ "Inputs + test 10 kHz (J9 TX/RST, FAN pin 4)", 0, 10000 },
+	{ "Inputs + test 100 kHz (J9 TX/RST, FAN pin 4)", 0, 100000 },
+	{ "Inputs + test 1 MHz (J9 TX/RST, FAN pin 4)", 0, 1000000 },
 };
 
+/* Бит 4*(n-1)+k — разъём хешплаты Jn: RX, TX, RST, PLUG. */
 static const char *channel_names[S9LA_MAX_CHANNELS] = {
-	"J1_RX", "J2_RX", "J3_RX", "J4_RX", "J5_RX", "J6_RX", "J7_RX", "J8_RX", "J9_RX",
-	"J1_PLUG", "J2_PLUG", "J3_PLUG", "J4_PLUG", "J5_PLUG", "J6_PLUG", "J7_PLUG",
-	"J8_PLUG", "J9_PLUG",
-	"FAN1", "FAN2", "FAN3", "FAN4", "FAN5", "FAN6",
-	"SCL1", "SDA1", "SCL2", "SDA2",
-	"CH28", "CH29", "CH30", "CH31",
+	"J1_RX", "J1_TX", "J1_RST", "J1_PLUG", "J2_RX", "J2_TX", "J2_RST", "J2_PLUG",
+	"J3_RX", "J3_TX", "J3_RST", "J3_PLUG", "J4_RX", "J4_TX", "J4_RST", "J4_PLUG",
+	"J5_RX", "J5_TX", "J5_RST", "J5_PLUG", "J6_RX", "J6_TX", "J6_RST", "J6_PLUG",
+	"J7_RX", "J7_TX", "J7_RST", "J7_PLUG", "J8_RX", "J8_TX", "J8_RST", "J8_PLUG",
 };
 
 static struct sr_dev_driver antminer_s9_la_driver_info;
+
+/* Сразу отправить режим и частоту меандра J18 — чтобы сигнал был и без захвата. */
+static int s9la_apply_pattern(const struct sr_dev_inst *sdi)
+{
+	struct dev_context *devc = sdi->priv;
+	char reply[128], *cmd;
+	int ret;
+
+	if (sdi->status != SR_ST_ACTIVE)
+		return SR_OK;   /* применится при START */
+	cmd = g_strdup_printf("CONF pattern=%d testfreq=%u",
+		patterns[devc->pattern].pattern, patterns[devc->pattern].testfreq);
+	ret = s9la_command(devc, cmd, reply, sizeof(reply));
+	g_free(cmd);
+	if (ret == SR_OK && !g_str_has_prefix(reply, "OK")) {
+		sr_err("Device rejected pattern: %s", reply);
+		ret = SR_ERR;
+	}
+	return ret;
+}
 
 /* conn → host, port. Accepts tcp-raw/h/p, tcp/h/p, h/p, h:p, h. */
 static gboolean parse_conn(const char *conn, char **host, char **port)
@@ -141,7 +168,7 @@ static GSList *scan(struct sr_dev_driver *di, GSList *options)
 	}
 	sr_tcp_disconnect(devc->tcp);
 
-	devc->num_channels = (uint32_t)kv_u64(reply, "channels", 28);
+	devc->num_channels = (uint32_t)kv_u64(reply, "channels", 32);
 	if (devc->num_channels == 0 || devc->num_channels > S9LA_MAX_CHANNELS)
 		devc->num_channels = S9LA_MAX_CHANNELS;
 	devc->clock_hz = kv_u64(reply, "clock", SR_MHZ(100));
@@ -224,7 +251,7 @@ static int config_get(uint32_t key, GVariant **data,
 		*data = g_variant_new_uint64(devc->capture_ratio);
 		break;
 	case SR_CONF_PATTERN_MODE:
-		*data = g_variant_new_string(patterns[devc->pattern]);
+		*data = g_variant_new_string(patterns[devc->pattern].name);
 		break;
 	default:
 		return SR_ERR_NA;
@@ -263,10 +290,14 @@ static int config_set(uint32_t key, GVariant *data,
 		devc->capture_ratio = v;
 		break;
 	case SR_CONF_PATTERN_MODE:
-		if ((idx = std_str_idx(data, ARRAY_AND_SIZE(patterns))) < 0)
+		idx = -1;
+		for (unsigned int i = 0; i < ARRAY_SIZE(patterns); i++)
+			if (!strcmp(g_variant_get_string(data, NULL), patterns[i].name))
+				idx = (int)i;
+		if (idx < 0)
 			return SR_ERR_ARG;
 		devc->pattern = idx;
-		break;
+		return s9la_apply_pattern(sdi);
 	default:
 		return SR_ERR_NA;
 	}
@@ -294,9 +325,13 @@ static int config_list(uint32_t key, GVariant **data,
 		devc = sdi->priv;
 		*data = std_gvar_tuple_u64(1, devc->memory);
 		break;
-	case SR_CONF_PATTERN_MODE:
-		*data = g_variant_new_strv(ARRAY_AND_SIZE(patterns));
+	case SR_CONF_PATTERN_MODE: {
+		const char *names[ARRAY_SIZE(patterns)];
+		for (unsigned int i = 0; i < ARRAY_SIZE(patterns); i++)
+			names[i] = patterns[i].name;
+		*data = g_variant_new_strv(names, ARRAY_SIZE(patterns));
 		break;
+	}
 	default:
 		return SR_ERR_NA;
 	}
@@ -386,9 +421,9 @@ static int dev_acquisition_start(const struct sr_dev_inst *sdi)
 	}
 
 	cmd = g_strdup_printf("CONF rate=%" PRIu64 " unit=%u samples=%" PRIu64
-		" pre=%" PRIu64 " tmask=%x tval=%x trise=%x tfall=%x pattern=%d",
+		" pre=%" PRIu64 " tmask=%x tval=%x trise=%x tfall=%x pattern=%d testfreq=%u",
 		devc->samplerate, devc->unit, limit, pre, tmask, tval, trise, tfall,
-		devc->pattern);
+		patterns[devc->pattern].pattern, patterns[devc->pattern].testfreq);
 	ret = s9la_command(devc, cmd, reply, sizeof(reply));
 	g_free(cmd);
 	if (ret != SR_OK)

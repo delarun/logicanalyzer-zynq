@@ -55,8 +55,8 @@ SR_PRIV int s9la_send(struct dev_context *devc, const char *cmd)
 
 	sr_dbg("-> %s", cmd);
 	while (done < len) {
-		int n = sr_tcp_write_bytes(devc->tcp, (const uint8_t *)line + done,
-			len - done);
+		/* MSG_NOSIGNAL: closed connection must not kill the client with SIGPIPE. */
+		ssize_t n = send(sock(devc), line + done, len - done, MSG_NOSIGNAL);
 		if (n <= 0) {
 			ret = SR_ERR_IO;
 			break;
@@ -71,7 +71,30 @@ SR_PRIV int s9la_send(struct dev_context *devc, const char *cmd)
  * Send a command and wait for its 'R' reply. Other frames received in the
  * meantime are discarded (there should be none outside of an acquisition).
  */
+static int command_once(struct dev_context *devc, const char *cmd,
+	char *reply, size_t reply_len);
+
+/*
+ * The device serves one client and drops the old connection when a new one
+ * arrives (e.g. sigrok-cli while PulseView is open). On I/O error reconnect
+ * once and retry.
+ */
 SR_PRIV int s9la_command(struct dev_context *devc, const char *cmd,
+	char *reply, size_t reply_len)
+{
+	int ret = command_once(devc, cmd, reply, reply_len);
+
+	if (ret == SR_ERR_IO) {
+		sr_info("Connection lost, reconnecting.");
+		sr_tcp_disconnect(devc->tcp);
+		if (sr_tcp_connect(devc->tcp) != SR_OK)
+			return SR_ERR_IO;
+		ret = command_once(devc, cmd, reply, reply_len);
+	}
+	return ret;
+}
+
+static int command_once(struct dev_context *devc, const char *cmd,
 	char *reply, size_t reply_len)
 {
 	uint8_t hdr[S9LA_HDR_LEN];

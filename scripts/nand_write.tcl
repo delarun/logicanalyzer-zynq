@@ -3,7 +3,7 @@
 # program_flash из Vitis 2022.2 с XVC-кабелем падает, поэтому так.
 #
 # Запуск: xsct scripts/nand_write.tcl <xvc_url> <ps7_init.tcl> <nandwrite.elf> <BOOT.BIN>
-# Перемычки загрузки — JTAG (JP1..JP4 сняты).
+# Перемычки любые: после сброса ядра остановлены (rst -system -stop).
 # =====================================================================
 
 lassign $argv xvc_url ps7init elf boot
@@ -17,7 +17,9 @@ connect -xvc-url $xvc_url
 after 500
 
 targets -set -nocase -filter {name =~ "APU*"}
-rst -system
+# -stop: ядра стоят после сброса — плата не начнёт грузиться с NAND/SD, даже если
+# перемычки не в режиме JTAG
+rst -system -stop
 after 1000
 source $ps7init
 ps7_init
@@ -49,11 +51,16 @@ for {set i 0} {$i < 600} {incr i} {
 }
 set diag {}
 foreach i {0 1 2 3 4 5 6 7 8} { lappend diag [format 0x%X [mrd -value [expr {$MB + 0x10 + 4 * $i}]]] }
+if {$status == 2} {
+    # перезапуск: при перемычках в режиме NAND плата сразу загрузит новый образ
+    targets -set -nocase -filter {name =~ "APU*"}
+    rst -system
+}
 disconnect
 puts "Диагностика NAND: rc=[lindex $diag 0] страница=[lindex $diag 1] блок=[lindex $diag 2] блоков=[lindex $diag 3] ширина=[lindex $diag 4] ecc=[lindex $diag 5] id=[lindex $diag 6] id2=[lindex $diag 7] id@20=[lindex $diag 8]"
 
 if {$status == 2} {
-    puts "OK: BOOT.BIN записан в NAND. Перемычки — NAND (JP2), затем перезапусти питание."
+    puts "OK: BOOT.BIN записан в NAND, плата перезапущена (загрузится с NAND, если стоит JP2)."
 } else {
     error [format "Ошибка записи NAND: статус 0x%X (подробности в UART)" $status]
 }

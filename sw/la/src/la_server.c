@@ -28,6 +28,7 @@ static struct {
 
     // настройки захвата
     u32      div, unit, samples, pre, tmask, tval, trise, tfall, pattern;
+    u32      testfreq;       // меандр на J18, Гц (0 — выкл)
 
     // текущий захват
     state_t  st;
@@ -51,7 +52,7 @@ void la_set_led(unsigned bit, int on)
 
 static u32 ctrl_level(void)
 {
-    return (s.pattern == 1 ? LA_CTRL_TEST : 0) | (s.pattern == 2 ? LA_CTRL_TXGEN : 0);
+    return s.pattern == 1 ? LA_CTRL_TEST : 0;
 }
 
 static err_t write_counted(const void *p, u16 len, u8 flags)
@@ -90,6 +91,7 @@ static void cmd_conf(char *args)
     u32 rate = LA_CLOCK_HZ / (s.div + 1);
     u32 unit = s.unit, samples = s.samples, pre = s.pre;
     u32 tmask = s.tmask, tval = s.tval, trise = s.trise, tfall = s.tfall, pattern = s.pattern;
+    u32 testfreq = s.testfreq;
 
     if (s.st != S_IDLE || s.start_pending) { reply("ERR busy"); return; }
 
@@ -106,6 +108,7 @@ static void cmd_conf(char *args)
         else if (!strcmp(tok, "trise"))   trise   = strtoul(eq, NULL, 16);
         else if (!strcmp(tok, "tfall"))   tfall   = strtoul(eq, NULL, 16);
         else if (!strcmp(tok, "pattern")) pattern = strtoul(eq, NULL, 10);
+        else if (!strcmp(tok, "testfreq")) testfreq = strtoul(eq, NULL, 10);
         else { reply("ERR unknown key %s", tok); return; }
     }
 
@@ -115,7 +118,8 @@ static void cmd_conf(char *args)
         reply("ERR samples (max %u)", (unsigned)(RING_SIZE / unit)); return;
     }
     if (pre >= samples) { reply("ERR pre"); return; }
-    if (pattern > 2)    { reply("ERR pattern"); return; }
+    if (pattern > 1)    { reply("ERR pattern"); return; }
+    if (testfreq > LA_CLOCK_HZ / 2) { reply("ERR testfreq"); return; }
 
     u32 div = (LA_CLOCK_HZ + rate / 2) / rate;
     if (div < 1) div = 1;
@@ -123,8 +127,21 @@ static void cmd_conf(char *args)
     s.unit = unit; s.samples = samples; s.pre = pre;
     s.tmask = tmask; s.tval = tval; s.trise = trise; s.tfall = tfall; s.pattern = pattern;
 
+    // меандр на J18 включается сразу, не дожидаясь захвата
+    u32 tdiv = 0, tf = 0;
+    if (testfreq) {
+        tdiv = (LA_CLOCK_HZ / 2 + testfreq / 2) / testfreq;
+        if (tdiv < 1) tdiv = 1;
+        tf = LA_CLOCK_HZ / 2 / tdiv;
+        tdiv -= 1;
+        if (tdiv == 0) tdiv = 1;   // 0 в регистре — выкл; максимум 25 МГц
+    }
+    s.testfreq = testfreq;
+    la_wr(LA_TDIV, tdiv);
+
     la_wr(LA_CTRL, ctrl_level());
-    reply("OK rate=%u samples=%u", (unsigned)(LA_CLOCK_HZ / div), (unsigned)samples);
+    reply("OK rate=%u samples=%u testfreq=%u", (unsigned)(LA_CLOCK_HZ / div),
+          (unsigned)samples, (unsigned)tf);
 }
 
 static void do_start(void)
@@ -339,9 +356,17 @@ static err_t on_accept(void *arg, struct tcp_pcb *pcb, err_t err)
     (void)arg;
     if (err != ERR_OK || !pcb) return ERR_VAL;
     if (s.pcb) {
-        xil_printf("la: второй клиент отклонён\r\n");
-        tcp_abort(pcb);
-        return ERR_ABRT;
+        // новый клиент вытесняет старого (например, sigrok-cli при открытом PulseView)
+        struct tcp_pcb *old = s.pcb;
+        xil_printf("la: новый клиент, старое соединение закрыто\r\n");
+        tcp_arg(old, NULL); tcp_recv(old, NULL); tcp_sent(old, NULL); tcp_err(old, NULL);
+        tcp_abort(old);
+        conn_gone();
+        // захват старого клиента остановлен; ждём, пока ядро закончит
+        while ((la_rd(LA_STATUS) & LA_ST_MASK) != LA_ST_IDLE &&
+               (la_rd(LA_STATUS) & LA_ST_MASK) != LA_ST_DONE)
+            ;
+        s.st = S_IDLE;
     }
     s.pcb = pcb;
     s.line_len = 0;

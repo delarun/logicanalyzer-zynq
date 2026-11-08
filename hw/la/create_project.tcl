@@ -60,14 +60,20 @@ apply_bd_automation -rule xilinx.com:bd_rule:axi4 \
 
 # Внешние порты
 foreach {name dir width} {
-    hb_rx    I 9
-    hb_plug  I 9
-    fan_tach I 6
-    i2c_in   I 4
-    hb_tx    O 9
+    hb_rx    I 8
+    hb_tx    I 8
+    hb_rst   I 8
+    hb_plug  I 8
+    test_tx  O 1
+    test_rst O 1
+    fan_pwm  O 1
     led      O 4
 } {
-    create_bd_port -dir $dir -from [expr {$width - 1}] -to 0 $name
+    if {$width == 1} {
+        create_bd_port -dir $dir $name
+    } else {
+        create_bd_port -dir $dir -from [expr {$width - 1}] -to 0 $name
+    }
     connect_bd_net [get_bd_ports $name] [get_bd_pins la/$name]
 }
 

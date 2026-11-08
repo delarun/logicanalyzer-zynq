@@ -9,7 +9,7 @@
 //
 // Регистры (AXI-Lite, смещения в байтах):
 //   0x00 CTRL    W: bit0 START (импульс), bit1 STOP (импульс)
-//                RW: bit4 TEST (вместо входов — номер выборки), bit5 TXGEN (меандры на hb_tx)
+//                RW: bit4 TEST (вместо входов — номер выборки)
 //   0x04 STATUS  R: bit[2:0] состояние (0 IDLE, 1 CAPTURE, 2 FLUSH, 3 DRAIN, 4 DONE),
 //                   bit4 TRIGGERED, bit5 OVERFLOW (FIFO переполнилось), bit6 AXI_ERROR
 //   0x08 DIV     выборка каждые DIV+1 тактов aclk
@@ -30,6 +30,11 @@
 //   0x44 WORDS   R: слов 64 бита записано в DDR (для отладки)
 //   0x48 DNA_LO  R: Device DNA [31:0]
 //   0x4C DNA_HI  R: bit31 — DNA прочитан, [24:0] — DNA [56:32]
+//   0x50 TDIV    RW: тестовый меандр на J9 TX, J9 RST и J18 (PWM вентиляторов):
+//                    f = aclk / (2 * (TDIV + 1)), 0 — выключен (низкий уровень)
+//
+// Каналы (бит выборки): по 4 на разъём хешплаты J1..J8 — RX, TX, RST, PLUG.
+// Все эти линии идут с банка 34 прямо на разъём (схема платы, лист 13).
 //
 // Все условия триггера объединяются по И. Пустые маски — срабатывание сразу
 // после PRE выборок. Кольцо должно вмещать PRE + POST выборок.
@@ -48,13 +53,15 @@ module s9la_core #(
     (* X_INTERFACE_PARAMETER = "POLARITY ACTIVE_LOW" *)
     input  wire        aresetn,
 
-    // Входы анализатора
-    input  wire [8:0]  hb_rx,
-    input  wire [8:0]  hb_plug,
-    input  wire [5:0]  fan_tach,
-    input  wire [3:0]  i2c_in,       // SCL1, SDA1, SCL2, SDA2 — только чтение
-    // Выходы
-    output wire [8:0]  hb_tx,        // тестовые меандры (TXGEN) или 1 (покой UART)
+    // Входы анализатора: разъёмы хешплат J1..J8
+    input  wire [7:0]  hb_rx,
+    input  wire [7:0]  hb_tx,
+    input  wire [7:0]  hb_rst,
+    input  wire [7:0]  hb_plug,
+    // Тестовые выходы: меандр TDIV или 0
+    output wire        test_tx,      // J9 TX
+    output wire        test_rst,     // J9 RST
+    output wire        fan_pwm,      // J18, пин 4 разъёмов FAN
     output wire [3:0]  led,
 
     // AXI-Lite slave
@@ -101,10 +108,11 @@ module s9la_core #(
     // -----------------------------------------------------------------
     // Регистры управления
     // -----------------------------------------------------------------
-    reg        r_test, r_txgen;
+    reg        r_test;
     reg [31:0] r_div, r_base, r_size, r_pre, r_post, r_tmask, r_tval, r_trise, r_tfall;
     reg [1:0]  r_unit;
     reg [2:0]  r_led;
+    reg [31:0] r_tdiv;
     reg        start_pulse, stop_pulse;
 
     reg [2:0]  state;
@@ -116,7 +124,14 @@ module s9la_core #(
     // -----------------------------------------------------------------
     // Входы: IOB-регистр + второй триггер синхронизации
     // -----------------------------------------------------------------
-    wire [31:0] pins = {4'b0, i2c_in, fan_tach, hb_plug, hb_rx};
+    // бит 4*n + {0 RX, 1 TX, 2 RST, 3 PLUG} — разъём J(n+1)
+    wire [31:0] pins;
+    genvar gp;
+    generate
+        for (gp = 0; gp < 8; gp = gp + 1) begin : g_pins
+            assign pins[4*gp +: 4] = {hb_plug[gp], hb_rst[gp], hb_tx[gp], hb_rx[gp]};
+        end
+    endgenerate
     (* IOB = "TRUE" *) reg [31:0] in_iob;
     reg [31:0] in_sync;
     always @(posedge aclk) begin
@@ -137,12 +152,13 @@ module s9la_core #(
             s_axi_awready <= 1'b0;
             s_axi_wready  <= 1'b0;
             s_axi_bvalid  <= 1'b0;
-            r_test <= 1'b0; r_txgen <= 1'b0;
+            r_test <= 1'b0;
             r_div  <= 32'd0; r_unit <= 2'd0;
             r_base <= 32'h1000_0000; r_size <= 32'h0100_0000;
             r_pre  <= 32'd0; r_post <= 32'd1;
             r_tmask <= 32'd0; r_tval <= 32'd0; r_trise <= 32'd0; r_tfall <= 32'd0;
             r_led  <= 3'd0;
+            r_tdiv <= 32'd0;
         end else begin
             if (!s_axi_bvalid && !s_axi_awready && s_axi_awvalid && s_axi_wvalid) begin
                 s_axi_awready <= 1'b1;
@@ -153,7 +169,6 @@ module s9la_core #(
                         start_pulse <= s_axi_wdata[0];
                         stop_pulse  <= s_axi_wdata[1];
                         r_test      <= s_axi_wdata[4];
-                        r_txgen     <= s_axi_wdata[5];
                     end
                     5'h02: r_div   <= s_axi_wdata;
                     5'h03: r_unit  <= s_axi_wdata[1:0];
@@ -166,6 +181,7 @@ module s9la_core #(
                     5'h0A: r_trise <= s_axi_wdata;
                     5'h0B: r_tfall <= s_axi_wdata;
                     5'h10: r_led   <= s_axi_wdata[2:0];
+                    5'h14: r_tdiv  <= s_axi_wdata;
                     default: ;
                 endcase
             end else begin
@@ -187,7 +203,7 @@ module s9la_core #(
                 s_axi_arready <= 1'b1;
                 s_axi_rvalid  <= 1'b1;
                 case (s_axi_araddr[6:2])
-                    5'h00: s_axi_rdata <= {26'd0, r_txgen, r_test, 4'd0};
+                    5'h00: s_axi_rdata <= {27'd0, r_test, 4'd0};
                     5'h01: s_axi_rdata <= {25'd0, axi_err, overflow, triggered, 1'b0, state};
                     5'h02: s_axi_rdata <= r_div;
                     5'h03: s_axi_rdata <= {30'd0, r_unit};
@@ -207,6 +223,7 @@ module s9la_core #(
                     5'h11: s_axi_rdata <= words_done;
                     5'h12: s_axi_rdata <= dna[31:0];
                     5'h13: s_axi_rdata <= {dna_done, 6'd0, dna[56:32]};
+                    5'h14: s_axi_rdata <= r_tdiv;
                     default: s_axi_rdata <= 32'd0;
                 endcase
             end else begin
@@ -261,22 +278,26 @@ module s9la_core #(
     endgenerate
 
     // -----------------------------------------------------------------
-    // Тестовые выходы и светодиоды
+    // Светодиоды и тестовый меандр (J9 TX, J9 RST, J18)
     // -----------------------------------------------------------------
-    reg [19:0] free_cnt;
-    always @(posedge aclk) free_cnt <= free_cnt + 20'd1;
-
-    genvar gi;
-    generate
-        for (gi = 0; gi < 9; gi = gi + 1) begin : g_tx
-            // J1: 25 МГц, J2: 6.25 МГц, ... J9: 100 МГц / 2^18 ≈ 381 Гц
-            reg tx_r;
-            always @(posedge aclk) tx_r <= r_txgen ? free_cnt[2*gi+1] : 1'b1;
-            assign hb_tx[gi] = tx_r;
-        end
-    endgenerate
-
     assign led = {state == ST_CAPT, r_led};
+
+    reg [31:0] tdiv_cnt;
+    reg        test_sq;
+    always @(posedge aclk) begin
+        if (!aresetn || r_tdiv == 32'd0) begin
+            tdiv_cnt <= 32'd0;
+            test_sq  <= 1'b0;
+        end else if (tdiv_cnt >= r_tdiv) begin
+            tdiv_cnt <= 32'd0;
+            test_sq  <= ~test_sq;
+        end else begin
+            tdiv_cnt <= tdiv_cnt + 32'd1;
+        end
+    end
+    assign test_tx  = test_sq;
+    assign test_rst = test_sq;
+    assign fan_pwm  = test_sq;
 
     // -----------------------------------------------------------------
     // FIFO 64 бита (BRAM), чтение «с упреждением»: fifo_q всегда = mem[rd_ptr]

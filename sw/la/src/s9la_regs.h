@@ -25,11 +25,11 @@
 #define LA_WORDS        0x44
 #define LA_DNA_LO       0x48
 #define LA_DNA_HI       0x4C
+#define LA_TDIV         0x50   // меандр на J9 TX/RST и J18: f = 100 МГц / (2 * (TDIV + 1)), 0 — выкл
 
 #define LA_CTRL_START   (1u << 0)
 #define LA_CTRL_STOP    (1u << 1)
 #define LA_CTRL_TEST    (1u << 4)
-#define LA_CTRL_TXGEN   (1u << 5)
 
 #define LA_ST_MASK      0x7u
 #define LA_ST_IDLE      0u
@@ -43,7 +43,7 @@
 
 #define LA_ID_VALUE     0x53394C41u   // "S9LA"
 #define LA_CLOCK_HZ     100000000u
-#define LA_CHANNELS     28
+#define LA_CHANNELS     32   // J1..J8: RX, TX, RST, PLUG
 
 // Кольцевой буфер выборок в DDR: 0x0800_0000 .. 0x1FFF_FFFF (384 МБ).
 // Программа и куча lwIP живут ниже 0x0800_0000 (см. lscript.ld).

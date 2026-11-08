@@ -1,0 +1,352 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1700' height='1160' viewBox='0 0 1700 1160'>
+<rect width='1700' height='1160' fill='#fbfbf8'/>
+<text x='40' y='42' font-size='22' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>S9LA — входная плата-переходник (одна группа из четырёх: 8 каналов)</text>
+<text x='40' y='66' font-size='13' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>Панель → защита (100 Ом + TVS + 100 кОм) → буфер SN74LVC245A (3.3 В, входы терпят 5 В) → шлейф IDC → разъёмы хешплат S9. Группы 2–4 одинаковые, см. таблицу внизу.</text>
+<rect x='30' y='130' width='80' height='571' rx='3' fill='#eef4fb' stroke='#1f5fa8' stroke-width='1.8'/>
+<text x='70' y='120' font-size='13' text-anchor='middle' fill='#1f5fa8' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>P1 — на панели</text>
+<text x='70' y='145' font-size='11' text-anchor='middle' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>IDC 2×5, 2.54 мм</text>
+<text x='40' y='179' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>1</text>
+<text x='58' y='179' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH0</text>
+<line x1='110' y1='175' x2='215' y2='175' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='40' y='237' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>2</text>
+<text x='58' y='237' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH1</text>
+<line x1='110' y1='233' x2='215' y2='233' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='40' y='295' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>3</text>
+<text x='58' y='295' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH2</text>
+<line x1='110' y1='291' x2='215' y2='291' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='40' y='353' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>4</text>
+<text x='58' y='353' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH3</text>
+<line x1='110' y1='349' x2='215' y2='349' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='40' y='481' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>5</text>
+<text x='58' y='481' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH4</text>
+<line x1='110' y1='477' x2='215' y2='477' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='40' y='539' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>6</text>
+<text x='58' y='539' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH5</text>
+<line x1='110' y1='535' x2='215' y2='535' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='40' y='597' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>7</text>
+<text x='58' y='597' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH6</text>
+<line x1='110' y1='593' x2='215' y2='593' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='40' y='655' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>8</text>
+<text x='58' y='655' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH7</text>
+<line x1='110' y1='651' x2='215' y2='651' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='40' y='695' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>9,10</text>
+<text x='78' y='695' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>GND</text>
+<line x1='110' y1='691' x2='140' y2='691' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='140' y1='691' x2='140' y2='697' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='131' y1='697' x2='149' y2='697' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='134' y1='701' x2='146' y2='701' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='137' y1='705' x2='143' y2='705' stroke='#1a1a1a' stroke-width='1.4'/>
+<rect x='215' y='169' width='36' height='12' rx='1' fill='#fff' stroke='#1a1a1a' stroke-width='1.5'/>
+<text x='233' y='165' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R1 100</text>
+<line x1='251' y1='175' x2='560' y2='175' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='300' cy='175' r='3.2' fill='#1a1a1a'/>
+<line x1='300' y1='175' x2='300' y2='183' stroke='#1a1a1a' stroke-width='1.6'/>
+<rect x='294' y='183' width='12' height='30' rx='1' fill='#fff' stroke='#1a1a1a' stroke-width='1.5'/>
+<text x='310' y='202' font-size='10' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R9 100k</text>
+<line x1='300' y1='213' x2='300' y2='219' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='291' y1='219' x2='309' y2='219' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='294' y1='223' x2='306' y2='223' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='297' y1='227' x2='303' y2='227' stroke='#1a1a1a' stroke-width='1.4'/>
+<circle cx='400' cy='175' r='3.2' fill='#1a1a1a'/>
+<rect x='215' y='227' width='36' height='12' rx='1' fill='#fff' stroke='#1a1a1a' stroke-width='1.5'/>
+<text x='233' y='223' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R2 100</text>
+<line x1='251' y1='233' x2='560' y2='233' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='300' cy='233' r='3.2' fill='#1a1a1a'/>
+<circle cx='400' cy='233' r='3.2' fill='#1a1a1a'/>
+<rect x='215' y='285' width='36' height='12' rx='1' fill='#fff' stroke='#1a1a1a' stroke-width='1.5'/>
+<text x='233' y='281' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R3 100</text>
+<line x1='251' y1='291' x2='560' y2='291' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='300' cy='291' r='3.2' fill='#1a1a1a'/>
+<circle cx='400' cy='291' r='3.2' fill='#1a1a1a'/>
+<rect x='215' y='343' width='36' height='12' rx='1' fill='#fff' stroke='#1a1a1a' stroke-width='1.5'/>
+<text x='233' y='339' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R4 100</text>
+<line x1='251' y1='349' x2='560' y2='349' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='300' cy='349' r='3.2' fill='#1a1a1a'/>
+<circle cx='400' cy='349' r='3.2' fill='#1a1a1a'/>
+<rect x='215' y='471' width='36' height='12' rx='1' fill='#fff' stroke='#1a1a1a' stroke-width='1.5'/>
+<text x='233' y='467' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R5 100</text>
+<line x1='251' y1='477' x2='560' y2='477' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='300' cy='477' r='3.2' fill='#1a1a1a'/>
+<circle cx='400' cy='477' r='3.2' fill='#1a1a1a'/>
+<rect x='215' y='529' width='36' height='12' rx='1' fill='#fff' stroke='#1a1a1a' stroke-width='1.5'/>
+<text x='233' y='525' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R6 100</text>
+<line x1='251' y1='535' x2='560' y2='535' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='300' cy='535' r='3.2' fill='#1a1a1a'/>
+<circle cx='400' cy='535' r='3.2' fill='#1a1a1a'/>
+<rect x='215' y='587' width='36' height='12' rx='1' fill='#fff' stroke='#1a1a1a' stroke-width='1.5'/>
+<text x='233' y='583' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R7 100</text>
+<line x1='251' y1='593' x2='560' y2='593' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='300' cy='593' r='3.2' fill='#1a1a1a'/>
+<circle cx='400' cy='593' r='3.2' fill='#1a1a1a'/>
+<rect x='215' y='645' width='36' height='12' rx='1' fill='#fff' stroke='#1a1a1a' stroke-width='1.5'/>
+<text x='233' y='641' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R8 100</text>
+<line x1='251' y1='651' x2='560' y2='651' stroke='#1a1a1a' stroke-width='1.6'/>
+<circle cx='300' cy='651' r='3.2' fill='#1a1a1a'/>
+<circle cx='400' cy='651' r='3.2' fill='#1a1a1a'/>
+<text x='195' y='691' font-size='10' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R10…R16 (100k на землю) —</text>
+<text x='195' y='704' font-size='10' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>у каждого канала, как R9 у CH0</text>
+<rect x='430' y='157' width='60' height='210' rx='3' fill='#eefaf1' stroke='#1e7d3a' stroke-width='1.8'/>
+<text x='460' y='256.0' font-size='13' text-anchor='middle' fill='#1e7d3a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>U2</text>
+<text x='460' y='272.0' font-size='9' text-anchor='middle' fill='#1e7d3a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>TPD4E1U06</text>
+<text x='460' y='284.0' font-size='9' text-anchor='middle' fill='#1e7d3a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>(TVS ×4)</text>
+<line x1='400' y1='175' x2='400' y2='175' stroke='#1a1a1a' stroke-width='1.6'/>
+<polyline points='400,175 400,187 430,187' fill='none' stroke='#1e7d3a' stroke-width='1.2'/>
+<line x1='400' y1='233' x2='400' y2='233' stroke='#1a1a1a' stroke-width='1.6'/>
+<polyline points='400,233 400,245 430,245' fill='none' stroke='#1e7d3a' stroke-width='1.2'/>
+<line x1='400' y1='291' x2='400' y2='291' stroke='#1a1a1a' stroke-width='1.6'/>
+<polyline points='400,291 400,303 430,303' fill='none' stroke='#1e7d3a' stroke-width='1.2'/>
+<line x1='400' y1='349' x2='400' y2='349' stroke='#1a1a1a' stroke-width='1.6'/>
+<polyline points='400,349 400,361 430,361' fill='none' stroke='#1e7d3a' stroke-width='1.2'/>
+<line x1='460' y1='367' x2='460' y2='377' stroke='#1e7d3a' stroke-width='1.6'/>
+<line x1='460' y1='377' x2='460' y2='383' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='451' y1='383' x2='469' y2='383' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='454' y1='387' x2='466' y2='387' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='457' y1='391' x2='463' y2='391' stroke='#1a1a1a' stroke-width='1.4'/>
+<rect x='430' y='459' width='60' height='210' rx='3' fill='#eefaf1' stroke='#1e7d3a' stroke-width='1.8'/>
+<text x='460' y='558.0' font-size='13' text-anchor='middle' fill='#1e7d3a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>U3</text>
+<text x='460' y='574.0' font-size='9' text-anchor='middle' fill='#1e7d3a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>TPD4E1U06</text>
+<text x='460' y='586.0' font-size='9' text-anchor='middle' fill='#1e7d3a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>(TVS ×4)</text>
+<line x1='400' y1='477' x2='400' y2='477' stroke='#1a1a1a' stroke-width='1.6'/>
+<polyline points='400,477 400,489 430,489' fill='none' stroke='#1e7d3a' stroke-width='1.2'/>
+<line x1='400' y1='535' x2='400' y2='535' stroke='#1a1a1a' stroke-width='1.6'/>
+<polyline points='400,535 400,547 430,547' fill='none' stroke='#1e7d3a' stroke-width='1.2'/>
+<line x1='400' y1='593' x2='400' y2='593' stroke='#1a1a1a' stroke-width='1.6'/>
+<polyline points='400,593 400,605 430,605' fill='none' stroke='#1e7d3a' stroke-width='1.2'/>
+<line x1='400' y1='651' x2='400' y2='651' stroke='#1a1a1a' stroke-width='1.6'/>
+<polyline points='400,651 400,663 430,663' fill='none' stroke='#1e7d3a' stroke-width='1.2'/>
+<line x1='460' y1='669' x2='460' y2='679' stroke='#1e7d3a' stroke-width='1.6'/>
+<line x1='460' y1='679' x2='460' y2='685' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='451' y1='685' x2='469' y2='685' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='454' y1='689' x2='466' y2='689' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='457' y1='693' x2='463' y2='693' stroke='#1a1a1a' stroke-width='1.4'/>
+<rect x='560' y='135' width='170' height='611' rx='3' fill='#fffdf2' stroke='#1a1a1a' stroke-width='2.2'/>
+<text x='645.0' y='123' font-size='14' text-anchor='middle' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>U1  SN74LVC245A</text>
+<text x='568' y='179' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>A1</text>
+<text x='554' y='171' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>2</text>
+<text x='722' y='179' font-size='12' text-anchor='end' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>B1</text>
+<text x='736' y='171' font-size='9' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>18</text>
+<text x='568' y='237' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>A2</text>
+<text x='554' y='229' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>3</text>
+<text x='722' y='237' font-size='12' text-anchor='end' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>B2</text>
+<text x='736' y='229' font-size='9' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>17</text>
+<text x='568' y='295' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>A3</text>
+<text x='554' y='287' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>4</text>
+<text x='722' y='295' font-size='12' text-anchor='end' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>B3</text>
+<text x='736' y='287' font-size='9' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>16</text>
+<text x='568' y='353' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>A4</text>
+<text x='554' y='345' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>5</text>
+<text x='722' y='353' font-size='12' text-anchor='end' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>B4</text>
+<text x='736' y='345' font-size='9' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>15</text>
+<text x='568' y='481' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>A5</text>
+<text x='554' y='473' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>6</text>
+<text x='722' y='481' font-size='12' text-anchor='end' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>B5</text>
+<text x='736' y='473' font-size='9' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>14</text>
+<text x='568' y='539' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>A6</text>
+<text x='554' y='531' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>7</text>
+<text x='722' y='539' font-size='12' text-anchor='end' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>B6</text>
+<text x='736' y='531' font-size='9' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>13</text>
+<text x='568' y='597' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>A7</text>
+<text x='554' y='589' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>8</text>
+<text x='722' y='597' font-size='12' text-anchor='end' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>B7</text>
+<text x='736' y='589' font-size='9' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>12</text>
+<text x='568' y='655' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>A8</text>
+<text x='554' y='647' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>9</text>
+<text x='722' y='655' font-size='12' text-anchor='end' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>B8</text>
+<text x='736' y='647' font-size='9' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>11</text>
+<text x='568' y='716' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>DIR</text>
+<text x='554' y='708' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>1</text>
+<polyline points='560,712 530,712 530,694' fill='none' stroke='#c0392b' stroke-width='1.6'/>
+<line x1='530' y1='694' x2='530' y2='686' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='522' y1='686' x2='538' y2='686' stroke='#c0392b' stroke-width='2'/>
+<text x='530' y='681' font-size='11' text-anchor='middle' fill='#c0392b' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>+3.3V</text>
+<text x='520' y='716' font-size='10' text-anchor='end' fill='#c0392b' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>A→B</text>
+<text x='568' y='738' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>/OE</text>
+<text x='554' y='730' font-size='9' text-anchor='end' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>19</text>
+<line x1='560' y1='734' x2='490' y2='734' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='490' y1='734' x2='490' y2='740' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='481' y1='740' x2='499' y2='740' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='484' y1='744' x2='496' y2='744' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='487' y1='748' x2='493' y2='748' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='615.0' y='153' font-size='11' text-anchor='middle' fill='#c0392b' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>VCC 20</text>
+<line x1='615.0' y1='135' x2='615.0' y2='95' stroke='#c0392b' stroke-width='1.6'/>
+<line x1='615.0' y1='95' x2='615.0' y2='87' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='607.0' y1='87' x2='623.0' y2='87' stroke='#c0392b' stroke-width='2'/>
+<text x='615.0' y='82' font-size='11' text-anchor='middle' fill='#c0392b' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>+3.3V</text>
+<text x='680.0' y='740' font-size='11' text-anchor='middle' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>GND 10</text>
+<line x1='680.0' y1='746' x2='680.0' y2='754' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='680.0' y1='754' x2='680.0' y2='760' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='671.0' y1='760' x2='689.0' y2='760' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='674.0' y1='764' x2='686.0' y2='764' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='677.0' y1='768' x2='683.0' y2='768' stroke='#1a1a1a' stroke-width='1.4'/>
+<polyline points='615.0,95 920,95' fill='none' stroke='#c0392b' stroke-width='1.6'/>
+<line x1='830' y1='95' x2='830' y2='105' stroke='#c0392b' stroke-width='1.6'/>
+<line x1='821' y1='105' x2='839' y2='105' stroke='#1a1a1a' stroke-width='2.2'/>
+<line x1='821' y1='111' x2='839' y2='111' stroke='#1a1a1a' stroke-width='2.2'/>
+<line x1='830' y1='111' x2='830' y2='117' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='830' y1='117' x2='830' y2='123' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='821' y1='123' x2='839' y2='123' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='824' y1='127' x2='836' y2='127' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='827' y1='131' x2='833' y2='131' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='830' y='89' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>C1 100n</text>
+<line x1='900' y1='95' x2='900' y2='105' stroke='#c0392b' stroke-width='1.6'/>
+<line x1='891' y1='105' x2='909' y2='105' stroke='#1a1a1a' stroke-width='2.2'/>
+<line x1='891' y1='111' x2='909' y2='111' stroke='#1a1a1a' stroke-width='2.2'/>
+<line x1='900' y1='111' x2='900' y2='117' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='900' y1='117' x2='900' y2='123' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='891' y1='123' x2='909' y2='123' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='894' y1='127' x2='906' y2='127' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='897' y1='131' x2='903' y2='131' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='900' y='89' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>C2 10µ</text>
+<text x='930' y='107' font-size='10' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>C1 — вплотную к выв. 20</text>
+<rect x='1080' y='139' width='200' height='274' rx='3' fill='#eef4fb' stroke='#1f5fa8' stroke-width='1.8'/>
+<text x='1180' y='129' font-size='13' text-anchor='middle' fill='#1f5fa8' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>JA → S9 J1 (шлейф IDC 18)</text>
+<text x='1180' y='154' font-size='10' text-anchor='middle' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>IDC 2×9, 2.54 мм</text>
+<polyline points='730,175 1080,175' fill='none' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='1092' y='179' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>12</text>
+<text x='1120' y='179' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>RXD</text>
+<text x='1184' y='179' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>→ J1_RX</text>
+<text x='945.0' y='170' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH0</text>
+<polyline points='730,233 1080,233' fill='none' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='1092' y='237' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>11</text>
+<text x='1120' y='237' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>TXD</text>
+<text x='1184' y='237' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>→ J1_TX</text>
+<text x='945.0' y='228' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH1</text>
+<polyline points='730,291 1080,291' fill='none' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='1092' y='295' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>15</text>
+<text x='1120' y='295' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>RST</text>
+<text x='1184' y='295' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>→ J1_RST</text>
+<text x='945.0' y='286' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH2</text>
+<polyline points='730,349 1080,349' fill='none' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='1092' y='353' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'> 5</text>
+<text x='1120' y='353' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>PLUG</text>
+<text x='1184' y='353' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>→ J1_PLUG</text>
+<text x='945.0' y='344' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH3</text>
+<text x='1092' y='385' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>16</text>
+<text x='1120' y='385' font-size='12' text-anchor='start' fill='#c0392b' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>VCC +3.3V</text>
+<text x='1092' y='405' font-size='11' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>1,2,9,10,13,14</text>
+<text x='1206' y='405' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>GND</text>
+<line x1='1280' y1='381' x2='1320' y2='381' stroke='#c0392b' stroke-width='1.6'/>
+<line x1='1320' y1='381' x2='1320' y2='373' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='1312' y1='373' x2='1328' y2='373' stroke='#c0392b' stroke-width='2'/>
+<text x='1320' y='368' font-size='11' text-anchor='middle' fill='#c0392b' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>+3.3V</text>
+<line x1='1280' y1='401' x2='1340' y2='401' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='1340' y1='401' x2='1340' y2='407' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='1331' y1='407' x2='1349' y2='407' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='1334' y1='411' x2='1346' y2='411' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='1337' y1='415' x2='1343' y2='415' stroke='#1a1a1a' stroke-width='1.4'/>
+<rect x='1080' y='441' width='200' height='274' rx='3' fill='#eef4fb' stroke='#1f5fa8' stroke-width='1.8'/>
+<text x='1180' y='431' font-size='13' text-anchor='middle' fill='#1f5fa8' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>JB → S9 J2 (шлейф IDC 18)</text>
+<text x='1180' y='456' font-size='10' text-anchor='middle' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>IDC 2×9, 2.54 мм</text>
+<polyline points='730,477 1080,477' fill='none' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='1092' y='481' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>12</text>
+<text x='1120' y='481' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>RXD</text>
+<text x='1184' y='481' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>→ J2_RX</text>
+<text x='945.0' y='472' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH4</text>
+<polyline points='730,535 1080,535' fill='none' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='1092' y='539' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>11</text>
+<text x='1120' y='539' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>TXD</text>
+<text x='1184' y='539' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>→ J2_TX</text>
+<text x='945.0' y='530' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH5</text>
+<polyline points='730,593 1080,593' fill='none' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='1092' y='597' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>15</text>
+<text x='1120' y='597' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>RST</text>
+<text x='1184' y='597' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>→ J2_RST</text>
+<text x='945.0' y='588' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH6</text>
+<polyline points='730,651 1080,651' fill='none' stroke='#1a1a1a' stroke-width='1.6'/>
+<text x='1092' y='655' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'> 5</text>
+<text x='1120' y='655' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>PLUG</text>
+<text x='1184' y='655' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>→ J2_PLUG</text>
+<text x='945.0' y='646' font-size='10' text-anchor='middle' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH7</text>
+<text x='1092' y='687' font-size='12' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>16</text>
+<text x='1120' y='687' font-size='12' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>VCC — не подкл.</text>
+<text x='1092' y='707' font-size='11' text-anchor='start' fill='#1f5fa8' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>1,2,9,10,13,14</text>
+<text x='1206' y='707' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>GND</text>
+<line x1='1280' y1='703' x2='1340' y2='703' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='1340' y1='703' x2='1340' y2='709' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='1331' y1='709' x2='1349' y2='709' stroke='#1a1a1a' stroke-width='2'/>
+<line x1='1334' y1='713' x2='1346' y2='713' stroke='#1a1a1a' stroke-width='1.6'/>
+<line x1='1337' y1='717' x2='1343' y2='717' stroke='#1a1a1a' stroke-width='1.4'/>
+<text x='1330' y='173' font-size='11' text-anchor='start' fill='#c0392b' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>+3.3 В берём с S9</text>
+<text x='1330' y='188' font-size='11' text-anchor='start' fill='#c0392b' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>(выв. 16 разъёма хешплаты,</text>
+<text x='1330' y='203' font-size='11' text-anchor='start' fill='#c0392b' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>соединить только с ОДНОГО</text>
+<text x='1330' y='218' font-size='11' text-anchor='start' fill='#c0392b' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>шлейфа на группу)</text>
+<text x='1330' y='533' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>Пины A0/A1/A2/EN/SCL/SDA</text>
+<text x='1330' y='548' font-size='11' text-anchor='start' fill='#777' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>шлейфа не подключать</text>
+<line x1='30' y1='811' x2='1670' y2='811' stroke='#777' stroke-width='1' stroke-dasharray='4 4'/>
+<text x='40' y='841' font-size='15' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>Группы</text>
+<rect x='40' y='853' width='520' height='126' rx='2' fill='#fff' stroke='#777' stroke-width='1'/>
+<rect x='40' y='853' width='520' height='21' fill='#ececec'/>
+<text x='46' y='868' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>Разъём на панели</text>
+<text x='196' y='868' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>Каналы</text>
+<text x='306' y='868' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>Шлейфы к S9</text>
+<line x1='40' y1='874' x2='560' y2='874' stroke='#ccc' stroke-width='1'/>
+<text x='46' y='889' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>P1</text>
+<text x='196' y='889' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH0–CH7</text>
+<text x='306' y='889' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>J1, J2</text>
+<line x1='40' y1='895' x2='560' y2='895' stroke='#ccc' stroke-width='1'/>
+<text x='46' y='910' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>P2</text>
+<text x='196' y='910' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH8–CH15</text>
+<text x='306' y='910' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>J3, J4</text>
+<line x1='40' y1='916' x2='560' y2='916' stroke='#ccc' stroke-width='1'/>
+<text x='46' y='931' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>P3</text>
+<text x='196' y='931' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH16–CH23</text>
+<text x='306' y='931' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>J5, J6</text>
+<line x1='40' y1='937' x2='560' y2='937' stroke='#ccc' stroke-width='1'/>
+<text x='46' y='952' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>P4</text>
+<text x='196' y='952' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>CH24–CH31</text>
+<text x='306' y='952' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>J7, J8</text>
+<line x1='40' y1='958' x2='560' y2='958' stroke='#ccc' stroke-width='1'/>
+<text x='46' y='973' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>P5 (тест)</text>
+<text x='196' y='973' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>меандр</text>
+<text x='306' y='973' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>J9: TXD (11) через 100 Ом, GND</text>
+<text x='600' y='841' font-size='15' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>Перечень на всю плату (4 группы)</text>
+<rect x='600' y='853' width='580' height='189' rx='2' fill='#fff' stroke='#777' stroke-width='1'/>
+<rect x='600' y='853' width='580' height='21' fill='#ececec'/>
+<text x='606' y='868' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>Поз.</text>
+<text x='736' y='868' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>Кол-во</text>
+<text x='806' y='868' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>Что</text>
+<line x1='600' y1='874' x2='1180' y2='874' stroke='#ccc' stroke-width='1'/>
+<text x='606' y='889' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>U1 (×4)</text>
+<text x='736' y='889' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>4</text>
+<text x='806' y='889' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>SN74LVC245APWR (TSSOP-20) / …ADWR (SOIC-20)</text>
+<line x1='600' y1='895' x2='1180' y2='895' stroke='#ccc' stroke-width='1'/>
+<text x='606' y='910' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>U2, U3 (×4)</text>
+<text x='736' y='910' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>8</text>
+<text x='806' y='910' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>TPD4E1U06DBVR (SOT-23-6) или 2× USBLC6-2SC6</text>
+<line x1='600' y1='916' x2='1180' y2='916' stroke='#ccc' stroke-width='1'/>
+<text x='606' y='931' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R1–R8 (×4)</text>
+<text x='736' y='931' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>32</text>
+<text x='806' y='931' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>100 Ом, 0603</text>
+<line x1='600' y1='937' x2='1180' y2='937' stroke='#ccc' stroke-width='1'/>
+<text x='606' y='952' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>R9–R16 (×4)</text>
+<text x='736' y='952' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>32</text>
+<text x='806' y='952' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>100 кОм, 0603</text>
+<line x1='600' y1='958' x2='1180' y2='958' stroke='#ccc' stroke-width='1'/>
+<text x='606' y='973' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>C1, C2 (×4)</text>
+<text x='736' y='973' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>4+4</text>
+<text x='806' y='973' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>100 нФ и 10 мкФ, 0603/0805</text>
+<line x1='600' y1='979' x2='1180' y2='979' stroke='#ccc' stroke-width='1'/>
+<text x='606' y='994' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>P1–P4</text>
+<text x='736' y='994' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>4</text>
+<text x='806' y='994' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>IDC 2×5 «вилка» в корпусе (на панель)</text>
+<line x1='600' y1='1000' x2='1180' y2='1000' stroke='#ccc' stroke-width='1'/>
+<text x='606' y='1015' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>JA, JB (×4)</text>
+<text x='736' y='1015' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>8</text>
+<text x='806' y='1015' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>IDC 2×9 «вилка» в корпусе + шлейфы 18 жил</text>
+<line x1='600' y1='1021' x2='1180' y2='1021' stroke='#ccc' stroke-width='1'/>
+<text x='606' y='1036' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>P5</text>
+<text x='736' y='1036' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>1</text>
+<text x='806' y='1036' font-size='11.5' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans Mono, Noto Sans Mono, monospace'>гнездо/штырь 2 конт. (тестовый выход + GND)</text>
+<text x='1230' y='845' font-size='15' text-anchor='start' fill='#1a1a1a' font-weight='bold' font-family='DejaVu Sans, Noto Sans, sans-serif'>Зачем и как</text>
+<text x='1230' y='869' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>• 74LVC245 при VCC = 3.3 В: входы терпят до 5.5 В —</text>
+<text x='1230' y='888' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>  можно щупать 5-вольтовую логику напрямую.</text>
+<text x='1230' y='907' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>• Сгорит дешёвый буфер, а не Zynq: на S9 входы</text>
+<text x='1230' y='926' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>  идут на ПЛИС без защиты.</text>
+<text x='1230' y='945' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>• 100 кОм: неподключённый канал = 0, а не шум.</text>
+<text x='1230' y='964' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>• Задержка буфера ~4–6 нс, разброс между</text>
+<text x='1230' y='983' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>  каналами &lt; 1 нс — для 100 МГц не важно.</text>
+<text x='1230' y='1002' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>• Шлейфы до S9 — как можно короче (&lt; 20 см),</text>
+<text x='1230' y='1021' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>  земли шлейфа соединить все.</text>
+<text x='1230' y='1040' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>• Не подавать &gt; 5.5 В и &lt; −0.5 В на входы:</text>
+<text x='1230' y='1059' font-size='12' text-anchor='start' fill='#1a1a1a' font-weight='normal' font-family='DejaVu Sans, Noto Sans, sans-serif'>  для 12 В нужен делитель.</text>
+</svg>

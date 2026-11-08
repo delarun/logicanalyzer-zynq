@@ -19,12 +19,12 @@ module tb_s9la_core;
     wire [63:0] m_wdata; wire [7:0] m_wstrb; wire m_wlast; wire m_wvalid; reg m_wready = 0;
     reg  [1:0]  m_bresp = 0; reg m_bvalid = 0; wire m_bready;
 
-    wire [8:0] hb_tx; wire [3:0] led;
+    wire [3:0] led;
 
     s9la_core #(.USE_DNA(0)) dut (
         .aclk(aclk), .aresetn(aresetn),
-        .hb_rx(9'd0), .hb_plug(9'd0), .fan_tach(6'd0), .i2c_in(4'd0),
-        .hb_tx(hb_tx), .led(led),
+        .hb_rx(8'd0), .hb_tx(8'd0), .hb_rst(8'd0), .hb_plug(8'd0),
+        .test_tx(), .test_rst(), .fan_pwm(), .led(led),
         .s_axi_awaddr(awaddr), .s_axi_awvalid(awvalid), .s_axi_awready(awready),
         .s_axi_wdata(wdata), .s_axi_wstrb(4'hF), .s_axi_wvalid(wvalid), .s_axi_wready(wready),
         .s_axi_bresp(bresp), .s_axi_bvalid(bvalid), .s_axi_bready(bready),
