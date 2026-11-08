@@ -8,7 +8,7 @@
 | Каналы | 32: RX, TX, RST, PLUG разъёмов хешплат J1–J8 (напрямую на ПЛИС) |
 | Частота выборки | до 100 МГц (100 МГц / N) |
 | Память | 384 МБ в DDR (до 384 млн выборок при 8 каналах) |
-| Тестовый выход | меандр 1 кГц…1 МГц на J9 TX/RST и PWM вентиляторов |
+| Тестовый выход | меандр 1 кГц…1 МГц на пине 4 разъёмов FAN (J18) |
 | Входная плата | схема переходника с защитой и буферами — [hw/frontend](hw/frontend/s9la_frontend.svg) |
 | Отладка | JTAG, SWD, SPI, UART, I2C на свободных линиях (J9, FAN): XVC, CMSIS-DAP для OpenOCD, flashrom, RFC2217 — [sw/la/PROBE.md](sw/la/PROBE.md) |
 | Устройства на ПК | `/dev/ttyETH0`, `/dev/i2c-10`, `/dev/spidev10.0` по сети — [tools/s9bridge](tools/s9bridge/README.md) |

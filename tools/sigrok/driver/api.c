@@ -50,7 +50,7 @@ static const uint64_t samplerates[] = {
 	SR_MHZ(25), SR_MHZ(50), SR_MHZ(100),
 };
 
-/* Pattern: режим устройства (0 входы, 1 счётчик) + тестовый меандр на J9 TX/RST и J18. */
+/* Pattern: режим устройства (0 входы, 1 счётчик) + тестовый меандр на J18 (пин 4 разъёмов FAN). */
 static const struct {
 	const char *name;
 	int pattern;
@@ -58,10 +58,10 @@ static const struct {
 } patterns[] = {
 	{ "Inputs", 0, 0 },
 	{ "Counter (self-test)", 1, 0 },
-	{ "Inputs + test 1 kHz (J9 TX/RST, FAN pin 4)", 0, 1000 },
-	{ "Inputs + test 10 kHz (J9 TX/RST, FAN pin 4)", 0, 10000 },
-	{ "Inputs + test 100 kHz (J9 TX/RST, FAN pin 4)", 0, 100000 },
-	{ "Inputs + test 1 MHz (J9 TX/RST, FAN pin 4)", 0, 1000000 },
+	{ "Inputs + test 1 kHz (FAN pin 4, J18)", 0, 1000 },
+	{ "Inputs + test 10 kHz (FAN pin 4, J18)", 0, 10000 },
+	{ "Inputs + test 100 kHz (FAN pin 4, J18)", 0, 100000 },
+	{ "Inputs + test 1 MHz (FAN pin 4, J18)", 0, 1000000 },
 };
 
 /* Бит 4*(n-1)+k — разъём хешплаты Jn: RX, TX, RST, PLUG. */
